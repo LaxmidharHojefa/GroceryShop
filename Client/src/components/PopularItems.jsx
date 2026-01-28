@@ -72,14 +72,27 @@ const PopularItems = () => {
             className="relative bg-white border rounded-xl p-4 flex flex-col justify-between hover:shadow-md transition"
           >
             {/* BADGE */}
-              {item.badge && (
+              {/* {item.badge && (
               <span
                 style={{ backgroundColor: item.bg }}
                 className="absolute top-3 left-3 text-xs font-semibold text-white px-2 py-1 rounded"
               >
                 {item.badge}
               </span>
-            )}
+            )} */}
+
+            {/* badge */}
+            {item.badge && (() => {
+              const b = String(item.badge);
+              const isPercent = b.includes("%");
+              const isHot = b.toLowerCase().includes("hot");
+              const badgeColor = isPercent ? "bg-green-500" : isHot ? "bg-red-500" : "bg-gray-500";
+              return (
+                <span className={`${badgeColor} absolute top-3 left-3 text-xs font-semibold text-white px-2 py-1 rounded`}>
+                  {b}
+                </span>
+              );
+            })()}
 
             {/* WISHLIST BUTTON */}
             <button
