@@ -135,8 +135,14 @@ const DealOfTheWeek = () => {
 
             <div className="flex justify-between items-center mt-2">
                 <div className="flex items-center gap-2">
-                  <StarRatingDisplay value={Number(item.rating || 0)} size={14} color="#16a34a" />
-                  <span className="text-sm text-gray-500">({item.reviews || 0})</span>
+                  {/* <StarRatingDisplay value={Number(item.rating || 0)} size={14} color="#16a34a" /> */}
+                  <div className="flex items-center gap-1 text-green-500 text-xs mt-1">
+                    {"★".repeat(Math.round(item.rating || 0))}
+                    <span className="text-gray-400 ml-1">
+                      ({item.reviews || 0} Review)
+                    </span>
+                  </div>
+                  {/* <span className="text-sm text-gray-500">({item.reviews || 0})</span> */}
                 </div>
                 <span className="text-sm font-semibold">
                 ${item.price.toFixed(2)} / {item.unit}
