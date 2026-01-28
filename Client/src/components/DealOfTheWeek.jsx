@@ -34,7 +34,7 @@ const DealOfTheWeek = () => {
     const fetchDeals = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:3000/api/products/deals");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/deals`);
         const data = (res.data && res.data.data) || [];
         setDeals(data); 
       } catch (err) {
@@ -117,7 +117,7 @@ const DealOfTheWeek = () => {
                     item.image && (item.image.startsWith("http") || item.image.startsWith("data:"))
                       ? item.image
                       : item.image
-                      ? `http://localhost:3000${item.image}`
+                      ? `${import.meta.env.VITE_API_URL}${item.image}`
                       : MaskGroup
                   }
                   alt={item.name}

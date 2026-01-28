@@ -23,7 +23,10 @@ const CategorySlider = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/categories");
+        
+        // const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`);
+        // const res = await fetch(`https://grocery-shop-backend-raba.onrender.com/api/categories`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`);
         const json = await res.json();
         setCategories(json.data);
       } catch (err) {
@@ -94,7 +97,7 @@ const CategorySlider = () => {
               className="min-w-[200px] h-[193.63px] p-4 rounded-xl flex flex-col items-center text-center"
             >
               <img
-                src={`http://localhost:3000${cat.image}`}
+                src={`${import.meta.env.VITE_API_URL}${cat.image}`}
                 alt={cat.name}
                 className="w-[100px] h-[92.1px] object-contain mb-3"
               />

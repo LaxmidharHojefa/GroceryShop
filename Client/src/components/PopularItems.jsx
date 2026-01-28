@@ -37,7 +37,7 @@ const PopularItems = () => {
     const fetchPopular = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:3000/api/products/popular");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/popular`);
         const data = (res.data && res.data.data) || [];
         setProducts(data.slice(0, 8));
       } catch (err) {
@@ -101,7 +101,7 @@ const PopularItems = () => {
                   item.image && (item.image.startsWith("http") || item.image.startsWith("data:"))
                     ? item.image
                     : item.image
-                    ? `http://localhost:3000${item.image}`
+                    ? `${import.meta.env.VITE_API_URL}${item.image}`
                     : MaskGroup
                 }
                 alt={item.name}

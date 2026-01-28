@@ -24,7 +24,7 @@ const MyAccount = () => {
         const token = localStorage.getItem("token");
 
         const res = await axios.get(
-          "http://localhost:3000/api/users/profile",
+          `${import.meta.env.VITE_API_URL}/api/users/profile`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -63,7 +63,7 @@ const MyAccount = () => {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        "http://localhost:3000/api/users/update-profile",
+        `${import.meta.env.VITE_API_URL}/api/users/update-profile`,
         formData,
         {
           headers: {

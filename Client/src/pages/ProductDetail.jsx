@@ -15,7 +15,7 @@ const ProductDetail = () => {
     const fetch = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:3000/api/products/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/${id}`);
         setProduct(res.data.data || res.data.product || res.data);
       } catch (err) {
         console.error("Failed to load product", err);
@@ -41,7 +41,7 @@ const ProductDetail = () => {
         <div className="flex gap-6">
           <div className="w-1/3">
             <img
-              src={product.image?.startsWith("http") ? product.image : `http://localhost:3000${product.image}`}
+              src={product.image?.startsWith("http") ? product.image : `${import.meta.env.VITE_API_URL}${product.image}`}
               alt={product.name}
               className="w-full object-contain h-64"
             />

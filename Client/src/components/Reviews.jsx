@@ -44,7 +44,7 @@ const Reviews = ({ productId, onProductUpdate }) => {
     const fetch = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:3000/api/products/${productId}/reviews`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/${productId}/reviews`);
         setReviews(res.data.data || []);
       } catch (err) {
         console.error("Failed to load reviews", err);
@@ -64,7 +64,7 @@ const Reviews = ({ productId, onProductUpdate }) => {
 
     try {
       setSubmitting(true);
-      const res = await axios.post(`http://localhost:3000/api/products/${productId}/reviews`, {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/products/${productId}/reviews`, {
         rating,
         comment,
       });
