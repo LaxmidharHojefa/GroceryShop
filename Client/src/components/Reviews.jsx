@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import apiClient from "../api/apiClient";
 
 const Star = ({ onClick }) => (
   <button type="button" onClick={onClick} className="text-xl text-gray-300 mr-1">
@@ -44,7 +44,7 @@ const Reviews = ({ productId, onProductUpdate }) => {
     const fetch = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/${productId}/reviews`);
+        const res = await apiClient.get(`/api/products/${productId}/reviews`);
         setReviews(res.data.data || []);
       } catch (err) {
         console.error("Failed to load reviews", err);
@@ -64,7 +64,7 @@ const Reviews = ({ productId, onProductUpdate }) => {
 
     try {
       setSubmitting(true);
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/products/${productId}/reviews`, {
+      const res = await apiClient.post(`/api/products/${productId}/reviews`, {
         rating,
         comment,
       });

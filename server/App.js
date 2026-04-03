@@ -20,13 +20,21 @@ connectDb();
 // }));
 
 // NOTE: cors configuration for live server and vercel deployment
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://grocery-shop-iota-tan.vercel.app",
+  "https://grocery-shop-laxmidharhojefas-projects.vercel.app",
+  "https://groceryshop-jst8.onrender.com",
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://grocery-shop-iota-tan.vercel.app",
-    "https://grocery-shop-backend-raba.onrender.com"
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // allow server-to-server, tools, etc.
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error(`CORS policy does not allow origin ${origin}`), false);
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization']
 }));

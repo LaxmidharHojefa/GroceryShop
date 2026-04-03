@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import apiClient, { API_BASE_URL } from "../api/apiClient";
 
 const bgColors = [
   "#D8FFF8",
@@ -23,12 +24,8 @@ const CategorySlider = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        
-        // const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`);
-        // const res = await fetch(`https://grocery-shop-backend-raba.onrender.com/api/categories`);
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`);
-        const json = await res.json();
-        setCategories(json.data);
+        const res = await apiClient.get("/api/categories");
+        setCategories(res.data.data || []);
       } catch (err) {
         setError("Failed to load categories");
       } finally {
@@ -97,7 +94,7 @@ const CategorySlider = () => {
               className="min-w-[200px] h-[193.63px] p-4 rounded-xl flex flex-col items-center text-center"
             >
               <img
-                src={`${import.meta.env.VITE_API_URL}${cat.image}`}
+                src={`${API_BASE_URL}${cat.image}`}
                 alt={cat.name}
                 className="w-[100px] h-[92.1px] object-contain mb-3"
               />

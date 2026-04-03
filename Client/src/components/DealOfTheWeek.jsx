@@ -3,7 +3,7 @@ import DealTimer from "./DealTimer";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoHeartSharp } from "react-icons/io5";
 import { BsCart4 } from "react-icons/bs";
-import axios from "axios";
+import apiClient, { API_BASE_URL } from "../api/apiClient";
 import MaskGroup from "../assets/MaskGroup.png";
 import { Link } from "react-router-dom";
 import Reviews, { StarRatingDisplay } from "./Reviews";
@@ -34,7 +34,7 @@ const DealOfTheWeek = () => {
     const fetchDeals = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/deals`);
+        const res = await apiClient.get("/api/products/deals");
         const data = (res.data && res.data.data) || [];
         setDeals(data); 
       } catch (err) {
@@ -117,7 +117,7 @@ const DealOfTheWeek = () => {
                     item.image && (item.image.startsWith("http") || item.image.startsWith("data:"))
                       ? item.image
                       : item.image
-                      ? `${import.meta.env.VITE_API_URL}${item.image}`
+                      ? `${API_BASE_URL}${item.image}`
                       : MaskGroup
                   }
                   alt={item.name}

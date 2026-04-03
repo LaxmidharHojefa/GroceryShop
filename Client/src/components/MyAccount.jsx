@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import apiClient from "../api/apiClient";
 import { FiUser, FiLogOut, FiMapPin, FiHeart } from "react-icons/fi";
 import { BsBox } from "react-icons/bs";
 
@@ -23,14 +23,11 @@ const MyAccount = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/users/profile`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await apiClient.get("/api/users/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         setFormData(res.data.user);
         setLoading(false);
@@ -62,15 +59,11 @@ const MyAccount = () => {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.put(
-        `${import.meta.env.VITE_API_URL}/api/users/update-profile`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await apiClient.put("/api/users/update-profile", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       alert("Profile updated successfully");
     } catch (error) {

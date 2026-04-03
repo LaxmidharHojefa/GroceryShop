@@ -3,7 +3,7 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { IoHeartSharp } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import { BsCart4 } from "react-icons/bs";
-import axios from "axios";
+import apiClient, { API_BASE_URL } from "../api/apiClient";
 
 const PopularItems = () => {
   const [wishlist, setWishlist] = useState({});
@@ -37,7 +37,7 @@ const PopularItems = () => {
     const fetchPopular = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/popular`);
+        const res = await apiClient.get("/api/products/popular");
         const data = (res.data && res.data.data) || [];
         setProducts(data.slice(0, 8));
       } catch (err) {
@@ -114,7 +114,7 @@ const PopularItems = () => {
                   item.image && (item.image.startsWith("http") || item.image.startsWith("data:"))
                     ? item.image
                     : item.image
-                    ? `${import.meta.env.VITE_API_URL}${item.image}`
+                    ? `${API_BASE_URL}${item.image}`
                     : MaskGroup
                 }
                 alt={item.name}
